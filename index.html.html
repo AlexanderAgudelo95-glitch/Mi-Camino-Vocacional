@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Camino Vocacional</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #070b15;
+  --card: rgba(12,18,38,0.95);
+  --card2: rgba(20,28,52,0.85);
+  --border: rgba(240,185,80,0.2);
+  --border2: rgba(255,255,255,0.07);
+  --amber: #f0b840;
+  --amber2: #ffd166;
+  --teal: #4ecdc4;
+  --coral: #ff6b6b;
+  --purple: #a78bfa;
+  --green: #34d399;
+  --text: #eee8d8;
+  --text2: #8090b0;
+  --text3: #5a6880;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  width: 100%; height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  overflow: hidden;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(1px 1px at 15% 25%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 35% 65%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 55% 15%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 75% 80%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 85% 40%, rgba(255,255,255,0.4) 0%, transparent 100%);
+  pointer-events: none; z-index: 0;
+}
+
+/* ═══ SCREENS ═══ */
+.screen {
+  position: fixed; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 24px; overflow-y: auto;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.screen.active { opacity: 1; pointer-events: all; }
+
+/* ═══ INTRO ═══ */
+#s-intro {
+  background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(240,185,80,0.08) 0%, transparent 70%);
+}
+.badge {
+  font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--amber); border: 1px solid rgba(240,185,80,0.3);
+  padding: 6px 18px; border-radius: 100px;
+  background: rgba(240,185,80,0.06); margin-bottom: 28px;
+  animation: up 0.7s ease 0.2s both;
+}
+.intro-title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(42px, 11vw, 72px);
+  font-weight: 900; line-height: 1.05;
+  text-align: center; margin-bottom: 16px;
+  animation: up 0.7s ease 0.4s both;
+}
+.intro-title em { color: var(--amber); font-style: italic; }
+.intro-sub {
+  font-size: 15px; color: var(--text2); text-align: center;
+  max-width: 360px; line-height: 1.7; margin-bottom: 36px;
+  animation: up 0.7s ease 0.6s both;
+}
+.chips {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  justify-content: center; margin-bottom: 40px;
+  animation: up 0.7s ease 0.8s both;
+}
+.chip {
+  font-size: 12px; color: var(--text2);
+  background: var(--card2); border: 1px solid var(--border2);
+  padding: 6px 14px; border-radius: 100px;
+}
+
+/* ═══ SETUP ═══ */
+#s-setup { background: var(--bg); }
+.setup-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 20px; padding: 36px 28px;
+  max-width: 420px; width: 100%;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 30px rgba(240,185,80,0.1);
+}
+.setup-icon { font-size: 52px; text-align: center; margin-bottom: 16px; }
+.setup-title {
+  font-family: 'Fraunces', serif; font-size: 26px; font-weight: 700;
+  text-align: center; margin-bottom: 8px;
+}
+.setup-desc {
+  font-size: 14px; color: var(--text2); text-align: center;
+  line-height: 1.6; margin-bottom: 28px;
+}
+.lbl {
+  font-size: 12px; color: var(--text2); display: block;
+  margin-bottom: 8px; letter-spacing: 1px; text-transform: uppercase;
+}
+.inp {
+  width: 100%; background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border2); border-radius: 12px;
+  padding: 14px 18px; color: var(--text);
+  font-family: 'Outfit', sans-serif; font-size: 16px;
+  outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+  margin-bottom: 24px;
+}
+.inp:focus { border-color: var(--amber); box-shadow: 0 0 0 3px rgba(240,185,80,0.12); }
+.inp::placeholder { color: var(--text3); }
+
+/* ═══ SCENARIO ═══ */
+#s-scenario {
+  justify-content: flex-start;
+  padding: 0; background: var(--bg);
+  align-items: stretch;
+}
+.sc-wrap {
+  width: 100%; max-width: 520px;
+  margin: 0 auto; min-height: 100vh;
+  display: flex; flex-direction: column;
+  padding: 16px 16px 40px;
+}
+
+/* top bar */
+.top-bar {
+  display: flex; align-items: center;
+  gap: 10px; padding-bottom: 14px; flex-shrink: 0;
+}
+.ch-badge {
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--amber); background: rgba(240,185,80,0.1);
+  border: 1px solid rgba(240,185,80,0.2);
+  padding: 4px 12px; border-radius: 100px; white-space: nowrap;
+}
+.step-txt { font-size: 13px; color: var(--text2); white-space: nowrap; }
+.prog-track {
+  flex: 1; height: 3px;
+  background: rgba(255,255,255,0.08); border-radius: 2px;
+}
+.prog-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--amber), var(--amber2));
+  border-radius: 2px; transition: width 0.6s ease;
+}
+
+/* vars strip */
+.vars-strip {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 6px; margin-bottom: 14px; flex-shrink: 0;
+}
+.var-item {
+  background: var(--card2); border: 1px solid var(--border2);
+  border-radius: 10px; padding: 8px 12px;
+}
+.var-head {
+  display: flex; align-items: center;
+  justify-content: space-between; margin-bottom: 5px;
+}
+.var-lbl { font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text2); }
+.var-val { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 700; }
+.var-track { height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
+.var-bar { height: 100%; border-radius: 2px; transition: width 0.7s ease; }
+
+/* scene card */
+.scene-card {
+  flex: 1; background: var(--card);
+  border: 1px solid var(--border); border-radius: 20px;
+  padding: 22px 20px; display: flex;
+  flex-direction: column; gap: 16px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  overflow-y: auto;
+}
+.scene-head { display: flex; align-items: flex-start; gap: 12px; }
+.scene-ico { font-size: 34px; line-height: 1; flex-shrink: 0; margin-top: 2px; }
+.scene-num { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; }
+.scene-title {
+  font-family: 'Fraunces', serif; font-size: 21px;
+  font-weight: 700; color: var(--amber2); line-height: 1.2;
+}
+.scene-loc { font-size: 12px; color: var(--text3); font-style: italic; }
+.scene-narrative {
+  font-size: 15px; line-height: 1.78; color: var(--text);
+  background: rgba(255,255,255,0.02);
+  border-left: 2px solid rgba(240,185,80,0.3);
+  padding: 14px 16px; border-radius: 0 10px 10px 0;
+}
+.choices-lbl {
+  font-size: 11px; text-transform: uppercase;
+  letter-spacing: 2px; color: var(--text3);
+}
+.choices-grid { display: flex; flex-direction: column; gap: 10px; }
+.choice-btn {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border2); border-radius: 12px;
+  padding: 14px 16px; cursor: pointer; color: var(--text);
+  font-family: 'Outfit', sans-serif; font-size: 14px;
+  text-align: left; line-height: 1.55;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  display: flex; align-items: flex-start; gap: 10px;
+}
+.choice-btn:hover {
+  background: rgba(240,185,80,0.08);
+  border-color: rgba(240,185,80,0.4);
+  transform: translateX(4px);
+}
+.choice-btn:active { transform: scale(0.98); }
+.choice-btn.selected {
+  background: rgba(240,185,80,0.12);
+  border-color: var(--amber);
+  pointer-events: none;
+}
+.choice-btn.disabled { pointer-events: none; opacity: 0.5; }
+.c-letter {
+  flex-shrink: 0; width: 24px; height: 24px;
+  background: rgba(240,185,80,0.1);
+  border: 1px solid rgba(240,185,80,0.3);
+  border-radius: 6px; font-size: 12px; font-weight: 700;
+  color: var(--amber); display: flex;
+  align-items: center; justify-content: center;
+  margin-top: 1px;
+}
+
+/* ═══ FEEDBACK ═══ */
+#s-feedback { background: var(--bg); }
+.fb-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 20px; padding: 28px 24px;
+  max-width: 480px; width: 100%;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 30px rgba(240,185,80,0.08);
+}
+.fb-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 2px;
+  color: var(--teal); background: rgba(78,205,196,0.1);
+  border: 1px solid rgba(78,205,196,0.2);
+  padding: 5px 14px; border-radius: 100px; margin-bottom: 18px;
+}
+.fb-action {
+  font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700;
+  color: var(--amber2); margin-bottom: 16px; line-height: 1.3;
+}
+.fb-outcome {
+  font-size: 15px; line-height: 1.75; color: var(--text);
+  background: rgba(255,255,255,0.03); border-radius: 12px;
+  padding: 16px; border-left: 3px solid var(--teal);
+  margin-bottom: 22px;
+}
+.deltas { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+.delta-row {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.03);
+  border-radius: 10px; padding: 10px 14px;
+}
+.delta-left { display: flex; align-items: center; gap: 8px; }
+.d-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.d-name { font-size: 13px; color: var(--text2); }
+.d-val { font-size: 15px; font-weight: 700; font-family: 'Fraunces', serif; }
+.d-pos { color: var(--green); }
+.d-neg { color: var(--coral); }
+
+/* ═══ BUTTONS ═══ */
+.btn {
+  background: linear-gradient(135deg, var(--amber) 0%, #e8a020 100%);
+  color: #080c14; font-family: 'Outfit', sans-serif;
+  font-size: 16px; font-weight: 700; border: none;
+  padding: 16px 40px; border-radius: 100px;
+  cursor: pointer; width: 100%;
+  box-shadow: 0 4px 20px rgba(240,185,80,0.35);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(240,185,80,0.5); }
+.btn:active { transform: scale(0.97); }
+.btn-ghost {
+  background: transparent; border: 1px solid var(--border2);
+  color: var(--text2); box-shadow: none; margin-top: 10px;
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.05); color: var(--text); transform: none; }
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes up {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(240,185,80,0.35); }
+  50%       { box-shadow: 0 4px 32px rgba(240,185,80,0.6); }
+}
+.pulse { animation: up 0.7s ease 1s both, pulse 2.5s ease 2s infinite; }
+
+/* ═══ RESULTS ═══ */
+.res-wrap {
+  width: 100%; max-width: 520px;
+  margin: 0 auto; padding: 24px 16px 48px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.res-header { text-align: center; padding: 24px 0 8px; }
+.res-eyebrow {
+  font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--text2); margin-bottom: 12px;
+}
+.res-name {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(30px, 8vw, 48px);
+  font-weight: 900; line-height: 1.1; margin-bottom: 8px;
+}
+.res-tagline {
+  font-size: 15px; color: var(--text2);
+  font-style: italic; line-height: 1.5;
+}
+.res-section {
+  background: var(--card); border: 1px solid var(--border2);
+  border-radius: 16px; padding: 20px;
+}
+.sec-label {
+  font-size: 10px; text-transform: uppercase; letter-spacing: 2px;
+  color: var(--text3); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 6px;
+}
+.sec-label::before {
+  content: ''; display: inline-block;
+  width: 14px; height: 2px;
+  background: var(--amber); border-radius: 1px;
+}
+.sec-text { font-size: 14px; line-height: 1.75; color: var(--text); }
+.sec-list {
+  list-style: none; display: flex;
+  flex-direction: column; gap: 8px;
+}
+.sec-list li {
+  font-size: 14px; line-height: 1.6; color: var(--text);
+  background: rgba(255,255,255,0.03); border-radius: 10px;
+  padding: 10px 14px; border-left: 2px solid var(--amber);
+}
+.risk-list li { border-left-color: var(--coral); }
+.rec-list li { border-left-color: var(--teal); }
+.fv-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+}
+.fv-item {
+  background: rgba(255,255,255,0.03);
+  border-radius: 10px; padding: 12px;
+}
+.fv-lbl {
+  font-size: 11px; color: var(--text3); text-transform: uppercase;
+  letter-spacing: 0.8px; margin-bottom: 6px;
+}
+.fv-val {
+  font-family: 'Fraunces', serif; font-size: 26px;
+  font-weight: 700; margin-bottom: 6px;
+}
+.impact-box {
+  background: linear-gradient(135deg, rgba(240,185,80,0.1) 0%, rgba(78,205,196,0.07) 100%);
+  border: 1px solid rgba(240,185,80,0.25);
+  border-radius: 16px; padding: 22px;
+}
+.impact-label {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 2px;
+  color: var(--amber); margin-bottom: 10px;
+}
+.impact-text {
+  font-family: 'Fraunces', serif; font-size: 16px;
+  font-style: italic; line-height: 1.65; color: var(--amber2);
+}
+/* ═══ INTERESTS ═══ */
+.int-wrap {
+  width:100%;max-width:520px;margin:0 auto;
+  padding:24px 16px 48px;display:flex;flex-direction:column;gap:18px;
+}
+.int-header{text-align:center;padding:16px 0 4px}
+.int-eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+.int-title{font-family:'Fraunces',serif;font-size:clamp(26px,7vw,38px);font-weight:900;line-height:1.1;margin-bottom:8px}
+.int-sub{font-size:14px;color:var(--text2);line-height:1.65}
+.int-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.int-chip{
+  background:var(--card2);border:1.5px solid var(--border2);
+  border-radius:14px;padding:14px 12px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  transition:all 0.2s;text-align:center;
+}
+.int-chip:hover{border-color:rgba(78,205,196,0.4);background:rgba(78,205,196,0.06)}
+.int-chip.sel{border-color:var(--teal);background:rgba(78,205,196,0.1)}
+.int-chip-ico{font-size:28px;line-height:1}
+.int-chip-lbl{font-size:13px;font-weight:600;color:var(--text)}
+.int-chip-sub{font-size:11px;color:var(--text3);line-height:1.4}
+.int-hint{font-size:12px;color:var(--text3);text-align:center}
+.int-btn{margin:0}
+.int-btn:disabled{opacity:0.4;cursor:not-allowed;transform:none !important}
+
+/* ═══ CAREERS ═══ */
+.car-wrap{
+  width:100%;max-width:520px;margin:0 auto;
+  padding:24px 16px 48px;display:flex;flex-direction:column;gap:14px;
+}
+.car-header{text-align:center;padding:16px 0 4px}
+.car-eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--amber);margin-bottom:10px}
+.car-title{font-family:'Fraunces',serif;font-size:clamp(22px,6vw,34px);font-weight:900;line-height:1.1;margin-bottom:8px}
+.car-sub{font-size:14px;color:var(--text2);line-height:1.6}
+.car-grid{display:flex;flex-direction:column;gap:12px}
+.car-card{
+  background:var(--card);border:1px solid var(--border2);
+  border-radius:16px;padding:18px 16px;
+  border-left:3px solid var(--amber);
+  transition:border-color 0.2s;
+}
+.car-card.match-high{border-left-color:var(--green)}
+.car-card.match-mid{border-left-color:var(--amber)}
+.car-card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:8px}
+.car-card-left{display:flex;align-items:center;gap:10px}
+.car-card-ico{font-size:26px;line-height:1;flex-shrink:0}
+.car-card-name{font-family:'Fraunces',serif;font-size:17px;font-weight:700;color:var(--amber2);line-height:1.2}
+.car-card-area{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:0.8px;margin-top:2px}
+.match-badge{
+  flex-shrink:0;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  padding:4px 10px;border-radius:100px;
+}
+.match-badge.high{background:rgba(52,211,153,0.15);color:var(--green);border:1px solid rgba(52,211,153,0.3)}
+.match-badge.mid{background:rgba(240,185,80,0.12);color:var(--amber);border:1px solid rgba(240,185,80,0.3)}
+.car-why{
+  font-size:13px;line-height:1.65;color:var(--text);
+  background:rgba(255,255,255,0.03);border-radius:10px;
+  padding:10px 12px;margin-bottom:10px;
+}
+.car-what-lbl{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text3);margin-bottom:5px}
+.car-what{font-size:13px;color:var(--teal);line-height:1.5}
+.refl-card {
+  background: var(--card);
+  border: 1px solid rgba(78,205,196,0.2);
+  border-radius: 20px; padding: 32px 24px;
+  max-width: 460px; width: 100%;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 30px rgba(78,205,196,0.07);
+}
+.refl-ico { font-size: 52px; text-align: center; margin-bottom: 16px; }
+.refl-title {
+  font-family: 'Fraunces', serif; font-size: 26px; font-weight: 700;
+  text-align: center; color: var(--amber2);
+  line-height: 1.2; margin-bottom: 8px;
+}
+.refl-sub {
+  font-size: 14px; color: var(--text2); text-align: center;
+  line-height: 1.6; margin-bottom: 22px;
+}
+.refl-q {
+  background: rgba(78,205,196,0.07);
+  border: 1px solid rgba(78,205,196,0.2);
+  border-radius: 12px; padding: 18px;
+  text-align: center; margin-bottom: 18px;
+}
+.refl-q p {
+  font-family: 'Fraunces', serif; font-size: 17px;
+  color: var(--teal); font-style: italic; line-height: 1.5;
+}
+.refl-area {
+  width: 100%; background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border2); border-radius: 12px;
+  padding: 14px 16px; color: var(--text);
+  font-family: 'Outfit', sans-serif; font-size: 14px;
+  line-height: 1.6; resize: none; outline: none;
+  min-height: 96px; margin-bottom: 18px;
+  transition: border-color 0.2s;
+}
+.refl-area:focus { border-color: var(--teal); }
+.refl-area::placeholder { color: var(--text3); }
+.refl-cta {
+  background: rgba(240,185,80,0.06);
+  border: 1px solid rgba(240,185,80,0.18);
+  border-radius: 12px; padding: 14px 16px; margin-bottom: 20px;
+}
+.refl-cta-lbl {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--text3); margin-bottom: 6px;
+}
+.refl-cta-txt { font-size: 14px; color: var(--amber); font-weight: 600; line-height: 1.5; }
+/* scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ INTRO ═══════════ -->
+<div id="s-intro" class="screen active">
+  <div class="badge">🧭 Serious Game Vocacional</div>
+  <h1 class="intro-title">Mi <em>Camino</em><br>Vocacional</h1>
+  <p class="intro-sub">Una historia donde tus decisiones construyen —o distorsionan— tu futuro. No hay respuestas correctas. Solo las tuyas.</p>
+  <div class="chips">
+    <span class="chip">10 escenarios</span>
+    <span class="chip">Decisiones reales</span>
+    <span class="chip">Perfil único</span>
+    <span class="chip">~20 minutos</span>
+  </div>
+  <button class="btn pulse" onclick="goTo('s-setup')">Comenzar mi camino →</button>
+</div>
+
+<!-- ═══════════ SETUP ═══════════ -->
+<div id="s-setup" class="screen">
+  <div class="setup-card">
+    <div class="setup-icon">🌟</div>
+    <h2 class="setup-title">Antes de empezar</h2>
+    <p class="setup-desc">Esta experiencia es tuya. Cada decisión refleja cómo navegas tu proceso vocacional.</p>
+    <label class="lbl" for="pname">¿Cómo quieres que te llamemos?</label>
+    <input id="pname" class="inp" type="text" placeholder="Tu nombre o apodo..." maxlength="30">
+    <button class="btn" onclick="startGame()">Entrar al juego →</button>
+    <button class="btn btn-ghost" onclick="goTo('s-intro')">← Volver</button>
+  </div>
+</div>
+
+<!-- ═══════════ SCENARIO ═══════════ -->
+<div id="s-scenario" class="screen">
+  <div class="sc-wrap">
+    <div class="top-bar">
+      <span class="ch-badge" id="chBadge">Cap. 1</span>
+      <span class="step-txt" id="stepTxt">1 / 10</span>
+      <div class="prog-track">
+        <div class="prog-fill" id="progFill" style="width:10%"></div>
+      </div>
+    </div>
+
+    <div class="vars-strip">
+      <div class="var-item">
+        <div class="var-head">
+          <span class="var-lbl">🧭 Claridad</span>
+          <span class="var-val" id="vC" style="color:var(--amber)">30</span>
+        </div>
+        <div class="var-track"><div class="var-bar" id="vCBar" style="width:30%;background:var(--amber)"></div></div>
+      </div>
+      <div class="var-item">
+        <div class="var-head">
+          <span class="var-lbl">🔗 Coherencia</span>
+          <span class="var-val" id="vCo" style="color:var(--teal)">30</span>
+        </div>
+        <div class="var-track"><div class="var-bar" id="vCoBar" style="width:30%;background:var(--teal)"></div></div>
+      </div>
+      <div class="var-item">
+        <div class="var-head">
+          <span class="var-lbl">🌡️ Presión</span>
+          <span class="var-val" id="vP" style="color:var(--coral)">20</span>
+        </div>
+        <div class="var-track"><div class="var-bar" id="vPBar" style="width:20%;background:var(--coral)"></div></div>
+      </div>
+      <div class="var-item">
+        <div class="var-head">
+          <span class="var-lbl">🗺️ Exploración</span>
+          <span class="var-val" id="vE" style="color:var(--purple)">20</span>
+        </div>
+        <div class="var-track"><div class="var-bar" id="vEBar" style="width:20%;background:var(--purple)"></div></div>
+      </div>
+    </div>
+
+    <div class="scene-card">
+      <div class="scene-head">
+        <span class="scene-ico" id="scIco">🏠</span>
+        <div>
+          <div class="scene-num" id="scNum">Escenario 1</div>
+          <div class="scene-title" id="scTitle">El Mapa en Blanco</div>
+          <div class="scene-loc" id="scLoc">Tu casa · Noche de domingo</div>
+        </div>
+      </div>
+      <div class="scene-narrative" id="scNarrative">Cargando...</div>
+      <div class="choices-lbl">¿Qué decides hacer?</div>
+      <div class="choices-grid" id="choicesGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ FEEDBACK ═══════════ -->
+<div id="s-feedback" class="screen">
+  <div class="fb-card">
+    <div class="fb-tag">💬 Consecuencia de tu decisión</div>
+    <div class="fb-action" id="fbAction">Acción</div>
+    <div class="fb-outcome" id="fbOutcome">Resultado</div>
+    <div class="deltas" id="fbDeltas"></div>
+    <button class="btn" id="fbBtn" onclick="nextScenario()">Continuar →</button>
+  </div>
+</div>
+
+<!-- ═══════════ RESULTS ═══════════ -->
+<div id="s-results" class="screen" style="justify-content:flex-start;padding:0;background:var(--bg)">
+  <div class="res-wrap">
+
+    <div class="res-header">
+      <div class="res-eyebrow">Tu perfil vocacional</div>
+      <div class="res-name" id="resName">🌟 Perfil</div>
+      <div class="res-tagline" id="resTagline">Descripción breve</div>
+    </div>
+
+    <!-- final vars -->
+    <div class="res-section">
+      <div class="sec-label">Indicadores finales</div>
+      <div class="fv-grid">
+        <div class="fv-item">
+          <div class="fv-lbl">🧭 Claridad</div>
+          <div class="fv-val" id="rC" style="color:var(--amber)">0</div>
+          <div class="var-track"><div class="var-bar" id="rCBar" style="background:var(--amber)"></div></div>
+        </div>
+        <div class="fv-item">
+          <div class="fv-lbl">🔗 Coherencia</div>
+          <div class="fv-val" id="rCo" style="color:var(--teal)">0</div>
+          <div class="var-track"><div class="var-bar" id="rCoBar" style="background:var(--teal)"></div></div>
+        </div>
+        <div class="fv-item">
+          <div class="fv-lbl">🌡️ Presión</div>
+          <div class="fv-val" id="rP" style="color:var(--coral)">0</div>
+          <div class="var-track"><div class="var-bar" id="rPBar" style="background:var(--coral)"></div></div>
+        </div>
+        <div class="fv-item">
+          <div class="fv-lbl">🗺️ Exploración</div>
+          <div class="fv-val" id="rE" style="color:var(--purple)">0</div>
+          <div class="var-track"><div class="var-bar" id="rEBar" style="background:var(--purple)"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- description -->
+    <div class="res-section">
+      <div class="sec-label">Descripción del perfil</div>
+      <p class="sec-text" id="resDesc"></p>
+    </div>
+
+    <!-- strengths -->
+    <div class="res-section">
+      <div class="sec-label">Tus fortalezas</div>
+      <ul class="sec-list" id="resStr"></ul>
+    </div>
+
+    <!-- risks -->
+    <div class="res-section">
+      <div class="sec-label">Riesgos si continúas así</div>
+      <ul class="sec-list risk-list" id="resRisk"></ul>
+    </div>
+
+    <!-- recs -->
+    <div class="res-section">
+      <div class="sec-label">Recomendaciones accionables</div>
+      <ul class="sec-list rec-list" id="resRec"></ul>
+    </div>
+
+    <!-- impact -->
+    <div class="impact-box">
+      <div class="impact-label">Si sigues tomando decisiones así...</div>
+      <p class="impact-text" id="resImpact"></p>
+    </div>
+
+    <button class="btn" onclick="goTo('s-interests')" style="margin-top:8px">Descubrir mis carreras → ✨</button>
+  </div>
+</div>
+
+<!-- ═══════════ INTERESTS ═══════════ -->
+<div id="s-interests" class="screen" style="justify-content:flex-start;padding:0;background:var(--bg)">
+  <div class="int-wrap">
+    <div class="int-header">
+      <div class="int-eyebrow">Paso extra · Autoconocimiento</div>
+      <h2 class="int-title">¿Qué te mueve por dentro?</h2>
+      <p class="int-sub">Selecciona las áreas que te generan curiosidad genuina. No lo que crees que deberías escoger — lo que realmente te llama.</p>
+    </div>
+    <div class="int-grid" id="interestGrid"></div>
+    <div class="int-hint" id="intHint">Selecciona al menos 2 áreas para continuar</div>
+    <button class="btn int-btn" id="intContinueBtn" onclick="showCareers()" disabled>Ver mis carreras → ✨</button>
+  </div>
+</div>
+
+<!-- ═══════════ CAREERS ═══════════ -->
+<div id="s-careers" class="screen" style="justify-content:flex-start;padding:0;background:var(--bg)">
+  <div class="car-wrap">
+    <div class="car-header">
+      <div class="car-eyebrow">Carreras recomendadas para ti</div>
+      <h2 class="car-title" id="carTitle">Basado en tu perfil e intereses</h2>
+      <p class="car-sub">Cada tarjeta explica por qué encaja con quien eres y cómo explorarla.</p>
+    </div>
+    <div class="car-grid" id="careerGrid"></div>
+    <button class="btn" style="margin:0 16px;width:calc(100% - 32px)" onclick="goTo('s-reflection')">Ir al cierre → 🌱</button>
+  </div>
+</div>
+
+<!-- ═══════════ REFLECTION ═══════════ -->
+<div id="s-reflection" class="screen" style="background:radial-gradient(ellipse 80% 60% at 50% 60%, rgba(78,205,196,0.07) 0%, transparent 70%), var(--bg)">
+  <div class="refl-card">
+    <div class="refl-ico">🌱</div>
+    <h2 class="refl-title">Un último paso</h2>
+    <p class="refl-sub">Este juego terminó. Pero tu camino vocacional real sigue. Esta pregunta es para eso.</p>
+    <div class="refl-q">
+      <p>"¿Qué decisión del juego cambiarías en tu vida real, y por qué?"</p>
+    </div>
+    <textarea class="refl-area" id="reflText" placeholder="Escribe tu reflexión aquí... (puedes copiarla a tu cuaderno)"></textarea>
+    <div class="refl-cta">
+      <div class="refl-cta-lbl">Tu acción concreta esta semana:</div>
+      <div class="refl-cta-txt" id="reflCta">Habla con alguien que esté haciendo lo que te interesa.</div>
+    </div>
+    <button class="btn" onclick="shareWhatsApp()" style="background:linear-gradient(135deg,#25d366,#128c7e);margin-bottom:10px">
+      <span style="display:flex;align-items:center;justify-content:center;gap:8px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Compartir por WhatsApp
+      </span>
+    </button>
+    <button class="btn btn-ghost" onclick="restart()">↩ Jugar de nuevo</button>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════
+   GAME STATE
+═══════════════════════════════ */
+var G = {
+  name: 'Viajero',
+  idx: 0,
+  c: 30, co: 30, p: 20, e: 20
+};
+
+/* ═══════════════════════════════
+   SCENARIOS
+═══════════════════════════════ */
+var SCENARIOS = [
+  {
+    chapter: 'Capítulo 1', title: 'El Mapa en Blanco',
+    loc: 'Tu casa · Noche de domingo', ico: '🏠',
+    narrative: 'El año escolar acaba de empezar y con él llegan las preguntas que nadie puede escapar. Esta noche en la cena, mientras pasas el arroz, tu papá deja el tenedor en el plato y te mira con esa expresión que conoces bien. "Ya estás en décimo", dice. "Pronto tienes que saber qué vas a hacer con tu vida." Tu mamá asiente. Tu hermano mayor, que estudia Derecho aunque odia las leyes, también te mira. El silencio pesa sobre la mesa y espera tu respuesta.',
+    choices: [
+      { txt: '"Creo que me llama algo con crear cosas... diseño, tecnología, algo así."',
+        action: 'Nombras un interés genuino en voz alta.',
+        outcome: 'Nombrarlo en voz alta lo hizo real. Tu papá frunció el ceño —"¿Y con eso qué vas a hacer?"— pero algo en ti se sintió más liviano. Reconociste un interés propio por primera vez, y eso es el principio de todo.',
+        d: { c:15, co:10, p:5, e:5 } },
+      { txt: '"Todavía no sé. Quiero explorar antes de decidir."',
+        action: 'Eliges la honestidad sobre la certeza.',
+        outcome: 'Fue una respuesta honesta. Tu mamá suspiró, pero tú mantuviste la mirada. Hay algo poderoso en reconocer que aún no sabes: es el primer paso real para descubrirlo. Aunque la presión comenzó a crecer.',
+        d: { c:5, co:5, p:10, e:15 } },
+      { txt: '"Lo que ustedes decidan. Ustedes tienen más experiencia."',
+        action: 'Delegas la decisión en tus padres.',
+        outcome: 'Sentiste alivio inmediato... pero también algo que se apagó adentro. Cediste la decisión más importante de tu vida sin siquiera intentar defenderla. La comodidad del corto plazo siempre tiene un precio.',
+        d: { c:-15, co:-15, p:20, e:-5 } },
+      { txt: '"Tengo algunas ideas, pero quiero hablar con personas que ya trabajen en esas áreas."',
+        action: 'Propones un plan activo de exploración.',
+        outcome: 'Tu papá levantó las cejas, sorprendido. No era la respuesta que esperaba, pero era una buena respuesta. Tienes un plan, y eso ya es más que la mayoría a tu edad.',
+        d: { c:10, co:15, p:-5, e:15 } }
+    ]
+  },
+  {
+    chapter: 'Capítulo 2', title: 'La Feria de las Posibilidades',
+    loc: 'Colegio · Feria universitaria', ico: '🎪',
+    narrative: 'El colegio organizó una feria con representantes de doce universidades. Hay mesas de Medicina, Derecho, Ingeniería, Diseño, Psicología, Gastronomía y más. Tienes 90 minutos y energía para dos o tres conversaciones profundas. A tu lado, tu mejor amigo ya corre hacia Medicina porque "eso es lo que quiere su mamá". El ruido es enorme. ¿Cómo usas este tiempo?',
+    choices: [
+      { txt: 'Voy directo a las mesas más conocidas: Medicina, Derecho, Ingeniería.',
+        action: 'Sigues el mapa del prestigio social.',
+        outcome: 'Recogiste folletos de carreras "importantes". Aprendiste datos interesantes, pero ninguna te emocionó de verdad. Seguiste el mapa de otros, no el tuyo. A veces el ruido del prestigio ahoga la señal del interés real.',
+        d: { c:5, co:-5, p:10, e:5 } },
+      { txt: 'Busco las carreras que más me han llamado la atención estos meses.',
+        action: 'Usas tu propio criterio de interés.',
+        outcome: 'Te fuiste a Diseño y Comunicación. El representante te mostró proyectos reales de estudiantes. Algo se activó. Saliste con preguntas nuevas —y eso, las preguntas— es la señal más valiosa.',
+        d: { c:20, co:15, p:-5, e:10 } },
+      { txt: 'Recorro todas las mesas aunque sea brevemente para tener panorama.',
+        action: 'Maximizas la cantidad de información.',
+        outcome: 'Acumulaste once folletos, ocho tarjetas y cuatro WhatsApps. Hay tanta información que ahora estás más confundido. Explorar sin filtro genera ruido, no claridad.',
+        d: { c:-5, co:-5, p:10, e:20 } },
+      { txt: 'Hablo con los estudiantes que vinieron a exponer, no con los representantes.',
+        action: 'Buscas información de primera mano.',
+        outcome: 'Encontraste tres estudiantes de último año que te contaron la realidad: el trabajo nocturno, las materias más difíciles, lo que nadie te dice. Fue la información más honesta de la tarde.',
+        d: { c:15, co:10, p:-5, e:15 } }
+    ]
+  },
+  {
+    chapter: 'Capítulo 3', title: 'La Sombra del Éxito Ajeno',
+    loc: 'Tu cuarto · Instagram · 11pm', ico: '📱',
+    narrative: 'Tu amigo Mateo acaba de publicar que fue aceptado con beca completa en la mejor universidad del país para estudiar Ingeniería de Sistemas. 847 likes en dos horas. Tu bandeja está llena de "¿Y tú qué vas a hacer?". Sientes algo que no quieres nombrar: no es envidia exactamente, pero tampoco es solo alegría. Es una presión nueva, oscura, que viene de todas partes. Apagas el teléfono. Y lo vuelves a encender.',
+    choices: [
+      { txt: 'Me alegra por Mateo. Voy a investigar si Sistemas también me llama a mí.',
+        action: 'Usas la comparación como información, no como amenaza.',
+        outcome: 'Investigaste el programa con curiosidad, no con urgencia. Resultó que no te llama la ingeniería como tal, pero sí el diseño de experiencias digitales. Eso es un hallazgo concreto.',
+        d: { c:10, co:10, p:-5, e:15 } },
+      { txt: 'Voy a aplicar a la misma universidad. Si Mateo pudo, yo también puedo.',
+        action: 'Dejas que la comparación dirija tu decisión.',
+        outcome: 'Pasaste dos semanas preparando una aplicación para un programa que no te convence del todo. Las decisiones tomadas desde la comparación rara vez nos llevan a donde queremos ir.',
+        d: { c:-10, co:-15, p:25, e:-5 } },
+      { txt: 'Esto me confirma que debo decidir ya, sin pensar tanto.',
+        action: 'El miedo a quedarte atrás acelera tu proceso.',
+        outcome: 'La urgencia se apoderó de ti. Pero decidir rápido sin claridad no es valentía: es pánico. Tomar decisiones desde el miedo tiene un costo muy alto.',
+        d: { c:-15, co:-10, p:20, e:-5 } },
+      { txt: 'Escribo en mi cuaderno qué siento realmente ante el éxito de Mateo.',
+        action: 'Eliges la autoobservación sobre la reacción.',
+        outcome: 'Descubriste que lo que sentías no era envidia: era miedo a no encontrar tu propio camino. Esa distinción cambia todo. Conocerte a ti mismo vale más que cualquier beca.',
+        d: { c:20, co:15, p:-10, e:5 } }
+    ]
+  },
+  {
+    chapter: 'Capítulo 4', title: 'La Chispa en el Salón',
+    loc: 'Salón de clases · Martes 2pm', ico: '🧠',
+    narrative: 'La profesora de Biología trae un documental sobre neurociencia: cómo el cerebro procesa emociones, por qué los humanos tomamos decisiones irracionales. Hay algo en esas imágenes que te atrapa de una forma que pocas clases lo han hecho. El timbre suena y tú todavía estás mirando la pantalla. La profesora te nota. "Parece que algo te interesó", dice con una sonrisa. Tienes treinta segundos antes de que llegue la siguiente clase.',
+    choices: [
+      { txt: 'Le pregunto a la profesora qué carreras abordan esto y cómo explorarlas.',
+        action: 'Conviertes la chispa en investigación activa.',
+        outcome: 'La profesora habló veinte minutos después de clase. Te mencionó Psicología, Neurociencia, Medicina, incluso Filosofía de la Mente. Saliste con más preguntas que respuestas. Eso es exactamente cómo funciona la curiosidad genuina.',
+        d: { c:20, co:15, p:-5, e:15 } },
+      { txt: 'Me emociona, pero medicina es muy difícil y costosa. Mejor lo dejo pasar.',
+        action: 'Apagas la chispa antes de entender qué era.',
+        outcome: 'Apagaste una posibilidad antes de explorarla. El interés por el comportamiento humano no lleva solo a Medicina. Decidiste no seguir el hilo por un mito, y eso tiene costo.',
+        d: { c:-10, co:-10, p:10, e:-5 } },
+      { txt: 'Busco videos sobre neurociencia y psicología esa misma noche.',
+        action: 'Sigues la curiosidad con autonomía.',
+        outcome: 'Hasta las 2am viendo contenido sobre el cerebro y el comportamiento humano. Agotador y fascinante al mismo tiempo. Al día siguiente tienes ojeras, pero también una dirección posible que antes no existía.',
+        d: { c:15, co:10, p:0, e:20 } },
+      { txt: '"Esas cosas son para gente muy inteligente. No es para mí."',
+        action: 'Limitas tu campo con una creencia restrictiva.',
+        outcome: 'La creencia de que ciertas carreras son "para otros" es una de las trampas más comunes. Acabas de ceder territorio de posibilidades basándote en un mito, no en evidencia real.',
+        d: { c:-15, co:-10, p:15, e:-10 } }
+    ]
+  },
+  {
+    chapter: 'Capítulo 5', title: 'El Verano que Decide',
+    loc: 'Vacaciones entre 10° y 11°', ico: '☀️',
+    narrative: 'Son las vacaciones entre décimo y once. Tu tío Mario tiene una empresa de diseño gráfico y te ofrece una pasantía no pagada de dos meses. Pero tu primo insiste en que este verano es el último para "vivir sin preocupaciones". Y tu mamá cree que deberías tomar un curso preuniversitario de matemáticas "por si acaso". Tres ofertas. Un solo verano. Y tú en el medio.',
+    choices: [
+      { txt: 'La pasantía con mi tío. Quiero conocer un campo real desde adentro.',
+        action: 'Priorizas la experiencia vocacional real.',
+        outcome: 'Dos meses viendo cómo funciona el diseño desde adentro. Aprendiste que el trabajo real siempre tiene dos caras. Eso vale más que cualquier folleto.',
+        d: { c:25, co:20, p:-5, e:15 } },
+      { txt: 'El verano con mi primo. El descanso también hace parte del proceso.',
+        action: 'Eliges el descanso sobre la exploración.',
+        outcome: 'Te divertiste. También te quedaste con la sensación de que el tiempo pasó sin dejarte algo concreto. El descanso para evitar decidir es distinto al descanso reparador.',
+        d: { c:-5, co:-5, p:10, e:5 } },
+      { txt: 'El curso preuniversitario. No quiero llegar sin preparación.',
+        action: 'Te preparas para lo genérico, no para lo específico.',
+        outcome: 'Matemáticas intensivas. Tu promedio mejoró, pero tu claridad vocacional no. Prepararse para "lo que sea" puede ser prepararse para nada en concreto.',
+        d: { c:-5, co:-5, p:15, e:-5 } },
+      { txt: 'Negocio con mi tío: un mes de pasantía y el otro de descanso.',
+        action: 'Buscas el equilibrio entre exploración y bienestar.',
+        outcome: 'La negociación resultó bien. Tu tío quedó impresionado por tu propuesta. Llegaste a once con más claridad, más energía y un hilo concreto que seguir.',
+        d: { c:20, co:15, p:-5, e:10 } }
+    ]
+  },
+  {
+    chapter: 'Capítulo 6', title: 'El Peso del Último Año',
+    loc: '11° grado · Semana de orientación', ico: '📋',
+    narrative: 'Es once. Todos parecen saber qué van a hacer. Laura ya aplicó a tres universidades. Sebastián consiguió cupo en un técnico. Y tú sigues con un mapa mental lleno de flechas en todas direcciones. La orientadora convoca una reunión con tus padres para hablar de "tu futuro". Es esta semana. Y sientes que el reloj nunca había sonado tan fuerte.',
+    choices: [
+      { txt: 'Pido una sesión individual con la orientadora antes de la reunión grupal.',
+        action: 'Buscas orientación profesional antes de decidir.',
+        outcome: 'La orientadora te aplicó un perfil de intereses y aptitudes. Los resultados no fueron una respuesta definitiva, pero sí un espejo. Llegaste a la reunión con más lenguaje para hablar de ti mismo.',
+        d: { c:20, co:15, p:-10, e:10 } },
+      { txt: 'Anuncio en la reunión que ya decidí lo que mis papás sugieren, para cerrar el tema.',
+        action: 'Usas la decisión para bajar la presión del momento.',
+        outcome: 'La tensión bajó inmediatamente. Y esa noche te quedaste mirando el techo preguntándote si eso era realmente lo que querías. La comodidad del corto plazo tiene un precio.',
+        d: { c:-20, co:-20, p:-5, e:-10 } },
+      { txt: 'Llego a la reunión con preguntas concretas: costos, becas, plazos, opciones.',
+        action: 'Conviertes la reunión de presión en sesión de información.',
+        outcome: 'Tus papás notaron que eras serio. Consiguieron contactos y fechas. La preparación convierte la ansiedad en acción.',
+        d: { c:10, co:10, p:-15, e:10 } },
+      { txt: 'Reconozco en la reunión que tengo dudas y pido apoyo, no presión.',
+        action: 'Eliges la honestidad sobre la apariencia de certeza.',
+        outcome: 'Fue incómodo al principio. Pero tu papá dijo que él también tuvo dudas y tomó una decisión de la que se arrepintió. La honestidad ante la incertidumbre no es debilidad: es madurez.',
+        d: { c:15, co:20, p:-20, e:5 } }
+    ]
+  },
+  {
+    chapter: 'Capítulo 7', title: 'Los Consejos que Nadie Pidió',
+    loc: 'Reunión familiar · Diciembre', ico: '👨‍👩‍👧‍👦',
+    narrative: 'En la reunión de fin de año, cada adulto tiene una opinión sobre tu futuro. Tu abuela cree que deberías ser profesora. Tu tía insiste en que estudies fuera del país. Tu primo mayor dice que "la universidad es una estafa". Tu vecino ingeniero jura que su carrera "es la del futuro". Todos hablan al tiempo y con total convicción. Ninguno te ha preguntado qué quieres tú.',
+    choices: [
+      { txt: 'Escucho todo, tomo nota de lo útil y descarto el resto sin pelea.',
+        action: 'Filtras la información con criterio propio.',
+        outcome: 'Aprendiste a escuchar sin dejarte arrastrar. El comentario sobre estudiar en el exterior tenía algo interesante. Filtrar bien es una habilidad que usarás toda la vida.',
+        d: { c:10, co:15, p:-10, e:10 } },
+      { txt: 'Estoy de acuerdo con todos para evitar conflictos.',
+        action: 'Eliges la armonía social sobre tu propia voz.',
+        outcome: 'Saliste con cinco planes contradictorios, todos "aprobados". Quedar bien con todos tiene un costo: quedarte sin criterio propio en el momento de decidir.',
+        d: { c:-20, co:-20, p:15, e:-5 } },
+      { txt: 'Me enojo y me retiro. No necesito que nadie me diga qué hacer.',
+        action: 'Proteges tu autonomía cerrando la puerta.',
+        outcome: 'La indignación era válida. Pero cerrarte a toda retroalimentación también tiene costo. Hay información útil en las experiencias ajenas, aunque venga mal envuelta.',
+        d: { c:5, co:-5, p:10, e:-5 } },
+      { txt: 'Les pregunto a cada uno cómo tomaron sus propias decisiones vocacionales.',
+        action: 'Usas el contexto para obtener datos reales de experiencia.',
+        outcome: 'Al preguntar cómo decidieron ellos, las conversaciones cambiaron. Tu abuela confesó que quiso estudiar Arte. La historia detrás del consejo siempre es más útil que el consejo mismo.',
+        d: { c:15, co:15, p:-5, e:15 } }
+    ]
+  },
+  {
+    chapter: 'Capítulo 8', title: 'El Formulario',
+    loc: 'Tu cuarto · 11pm · Plazo: 72 horas', ico: '💻',
+    narrative: 'Tienes el formulario de inscripción universitaria en pantalla. Plazo: setenta y dos horas. Son las once de la noche. Llevas cuarenta minutos mirando la lista de programas. Algunos te emocionan. Otros son "la opción segura". El cursor parpadea sobre el campo "Programa de interés". Afuera hay silencio. Adentro, todo lo contrario.',
+    choices: [
+      { txt: 'Inscribo el programa que más me emociona, aunque no sea el más "seguro".',
+        action: 'Confías en lo que has aprendido sobre ti mismo.',
+        outcome: 'Esta decisión no se siente impulsiva. Se siente como el resultado de un camino. La emoción genuina es una de las fuentes de energía más sostenibles para una carrera larga.',
+        d: { c:20, co:20, p:-10, e:5 } },
+      { txt: 'Inscribo lo que mis papás sugieren. Al menos tendré apoyo de ellos.',
+        action: 'Priorizas el apoyo externo sobre tu alineación interna.',
+        outcome: 'La seguridad emocional importa. Pero el apoyo en la carrera equivocada también tiene sus límites. Si hay algo en ese programa que también te llame, puede funcionar.',
+        d: { c:-10, co:-15, p:-5, e:-5 } },
+      { txt: 'Investigo una noche más y aplico mañana con más información.',
+        action: 'Eliges la calidad de la decisión sobre la velocidad.',
+        outcome: 'Dormiste poco pero llegaste a la mañana con más certeza. Una buena decisión tomada doce horas después es mejor que una mala tomada ahora.',
+        d: { c:15, co:15, p:-5, e:10 } },
+      { txt: 'Aplico a dos programas distintos para mantener opciones abiertas.',
+        action: 'Diversificas para no cerrar puertas.',
+        outcome: 'Inteligente si los dos te llaman genuinamente. Arriesgado si es una manera de aplazar la decisión real. Tener opciones tiene valor; usarlas para evitar elegir puede prolongar la indefinición.',
+        d: { c:5, co:-5, p:5, e:10 } }
+    ]
+  },
+  {
+    chapter: 'Capítulo 9', title: 'El Primer Trimestre',
+    loc: 'Universidad o instituto · Tercer mes', ico: '🎓',
+    narrative: 'Tres meses adentro. La realidad ya no es un folleto. Hay materias que te fascinan y otras que te cuestan horrores. Un profesor que parece haber olvidado por qué eligió su carrera. Y un proyecto grupal que te mantuvo despierto hasta las tres de la mañana... no por obligación, sino porque no querías parar. Algo está tomando forma. Pero también hay momentos de duda real.',
+    choices: [
+      { txt: 'Me enfoco en las materias que me emocionan y busco profundizar en ellas.',
+        action: 'Inviertes energía donde hay motivación genuina.',
+        outcome: 'Encontraste el hilo. La motivación genuina es más sostenible que la disciplina forzada. Tus notas no son perfectas, pero tu dirección sí es real.',
+        d: { c:20, co:20, p:-10, e:5 } },
+      { txt: 'Siento que me equivoqué de carrera. Necesito evaluar si debo cambiar.',
+        action: 'Te permites cuestionar con honestidad.',
+        outcome: 'Tres meses no siempre son suficientes para saberlo. Si después de reflexión honesta el malestar persiste, cambiar es una decisión válida y valiente, no un fracaso.',
+        d: { c:10, co:-5, p:15, e:15 } },
+      { txt: 'Busco a un estudiante de semestres avanzados para que me oriente.',
+        action: 'Usas la experiencia de otros como mapa.',
+        outcome: 'Andrea, de séptimo semestre, te dijo: "El segundo semestre es donde la carrera muestra su verdadera cara." Decidiste darle más tiempo al proceso con información real.',
+        d: { c:15, co:15, p:-10, e:10 } },
+      { txt: 'Sigo adelante aunque no esté seguro. "Esto también pasará."',
+        action: 'Perseveras sin analizar la causa del malestar.',
+        outcome: 'Resistir sin claridad puede ser perseverancia o puede ser negación. Depende de si hay algo concreto por lo que aguantar.',
+        d: { c:-5, co:5, p:15, e:-5 } }
+    ]
+  },
+  {
+    chapter: 'Capítulo 10', title: 'La Mirada hacia Atrás',
+    loc: 'Cafetería · Casi dos años después', ico: '🌅',
+    narrative: 'Han pasado casi dos años. Estás en una cafetería, con un cuaderno en la mano. Un joven se acerca —estudiante de décimo, ojos perdidos— y te dice que está completamente confundido con su futuro. Te mira esperando algo. Y en ese momento te preguntas qué es lo que realmente aprendiste en todo este tiempo.',
+    choices: [
+      { txt: '"Lo más importante es conocerte antes de elegir una carrera. Todo lo demás viene después."',
+        action: 'Compartes la sabiduría del autoconocimiento.',
+        outcome: 'Compartiste lo que aprendiste de la manera más difícil. El joven te mira con atención. Algo en tus palabras tiene peso real —el peso de la experiencia vivida.',
+        d: { c:10, co:10, p:-5, e:5 } },
+      { txt: '"Elige lo que mejor pague. La vida real es así y punto."',
+        action: 'Reduces la vocación a una sola variable económica.',
+        outcome: 'El dinero importa. Pero sin alineación vocacional, el salario llega acompañado de un costo que no aparece en ninguna tabla: el tiempo de tu vida.',
+        d: { c:-10, co:-10, p:5, e:0 } },
+      { txt: '"¿Qué es lo que más te gusta hacer cuando nadie te está mirando?"',
+        action: 'Le das la mejor pregunta vocacional que existe.',
+        outcome: 'La pregunta lo sorprende. Nadie se la había hecho así. Pasa un minuto pensando en serio. Luego dice: "Armar cosas... y explicarlas." Eso es un comienzo real.',
+        d: { c:15, co:15, p:-5, e:5 } },
+      { txt: '"No hay respuestas fáciles, pero buscarse a uno mismo vale la pena."',
+        action: 'Honras la complejidad del proceso sin simplificarla.',
+        outcome: 'Honesto y real. No le prometiste certeza porque tú mismo sabes que no existe. Le prometiste que el esfuerzo de buscarse tiene valor. Él lo creyó.',
+        d: { c:10, co:15, p:-5, e:5 } }
+    ]
+  }
+];
+
+/* ═══════════════════════════════
+   NAVIGATION
+═══════════════════════════════ */
+function goTo(id) {
+  var all = document.querySelectorAll('.screen');
+  for (var i = 0; i < all.length; i++) all[i].classList.remove('active');
+  var el = document.getElementById(id);
+  el.classList.add('active');
+  el.scrollTop = 0;
+}
+
+/* ═══════════════════════════════
+   HELPERS
+═══════════════════════════════ */
+function cap(n) { return Math.max(0, Math.min(100, Math.round(n))); }
+
+function updateVars() {
+  document.getElementById('vC').textContent = G.c;
+  document.getElementById('vCo').textContent = G.co;
+  document.getElementById('vP').textContent = G.p;
+  document.getElementById('vE').textContent = G.e;
+  document.getElementById('vCBar').style.width = G.c + '%';
+  document.getElementById('vCoBar').style.width = G.co + '%';
+  document.getElementById('vPBar').style.width = G.p + '%';
+  document.getElementById('vEBar').style.width = G.e + '%';
+}
+
+/* ═══════════════════════════════
+   GAME FLOW
+═══════════════════════════════ */
+function startGame() {
+  var inp = document.getElementById('pname');
+  G.name = inp.value.trim() || 'Viajero';
+  G.idx = 0;
+  G.c = 30; G.co = 30; G.p = 20; G.e = 20;
+  renderScenario();
+  goTo('s-scenario');
+}
+
+function renderScenario() {
+  var sc = SCENARIOS[G.idx];
+  var total = SCENARIOS.length;
+  var pct = Math.round((G.idx + 1) / total * 100);
+
+  document.getElementById('chBadge').textContent = sc.chapter;
+  document.getElementById('stepTxt').textContent = (G.idx + 1) + ' / ' + total;
+  document.getElementById('progFill').style.width = pct + '%';
+  document.getElementById('scIco').textContent = sc.ico;
+  document.getElementById('scNum').textContent = 'Escenario ' + (G.idx + 1);
+  document.getElementById('scTitle').textContent = sc.title;
+  document.getElementById('scLoc').textContent = sc.loc;
+  document.getElementById('scNarrative').textContent = sc.narrative;
+
+  updateVars();
+
+  var grid = document.getElementById('choicesGrid');
+  grid.innerHTML = '';
+  var letters = ['A','B','C','D'];
+  for (var i = 0; i < sc.choices.length; i++) {
+    (function(idx) {
+      var btn = document.createElement('button');
+      btn.className = 'choice-btn';
+      btn.innerHTML = '<span class="c-letter">' + letters[idx] + '</span><span>' + sc.choices[idx].txt + '</span>';
+      btn.onclick = function() { makeChoice(idx); };
+      grid.appendChild(btn);
+    })(i);
+  }
+
+  document.getElementById('s-scenario').scrollTop = 0;
+}
+
+function makeChoice(ci) {
+  var sc = SCENARIOS[G.idx];
+  var ch = sc.choices[ci];
+
+  // disable all buttons
+  var btns = document.querySelectorAll('.choice-btn');
+  for (var b = 0; b < btns.length; b++) {
+    btns[b].classList.add(b === ci ? 'selected' : 'disabled');
+    btns[b].disabled = true;
+  }
+
+  // apply delta
+  G.c  = cap(G.c  + (ch.d.c  || 0));
+  G.co = cap(G.co + (ch.d.co || 0));
+  G.p  = cap(G.p  + (ch.d.p  || 0));
+  G.e  = cap(G.e  + (ch.d.e  || 0));
+
+  // build feedback
+  renderFeedback(ch);
+
+  setTimeout(function() { goTo('s-feedback'); }, 300);
+}
+
+function renderFeedback(ch) {
+  document.getElementById('fbAction').textContent = ch.action;
+  document.getElementById('fbOutcome').textContent = ch.outcome;
+
+  var varDefs = [
+    { key:'c',  label:'Claridad vocacional',   color:'#f0b840' },
+    { key:'co', label:'Coherencia de decisiones', color:'#4ecdc4' },
+    { key:'p',  label:'Presión externa',        color:'#f87171' },
+    { key:'e',  label:'Exploración',            color:'#a78bfa' }
+  ];
+
+  var deltas = document.getElementById('fbDeltas');
+  deltas.innerHTML = '';
+
+  for (var i = 0; i < varDefs.length; i++) {
+    var vd = varDefs[i];
+    var diff = ch.d[vd.key] || 0;
+    if (diff === 0) continue;
+    var row = document.createElement('div');
+    row.className = 'delta-row';
+    var cls = diff > 0 ? 'd-pos' : 'd-neg';
+    var sign = diff > 0 ? '+' : '';
+    var arrow = diff > 0 ? '↑' : '↓';
+    row.innerHTML =
+      '<div class="delta-left">' +
+        '<div class="d-dot" style="background:' + vd.color + '"></div>' +
+        '<span class="d-name">' + vd.label + '</span>' +
+      '</div>' +
+      '<span class="d-val ' + cls + '">' + sign + diff + ' ' + arrow + '</span>';
+    deltas.appendChild(row);
+  }
+
+  var isLast = (G.idx >= SCENARIOS.length - 1);
+  document.getElementById('fbBtn').textContent = isLast ? 'Ver mi perfil →' : 'Continuar →';
+}
+
+function nextScenario() {
+  G.idx++;
+  if (G.idx >= SCENARIOS.length) {
+    showResults();
+  } else {
+    renderScenario();
+    goTo('s-scenario');
+  }
+}
+
+/* ═══════════════════════════════
+   PROFILES
+═══════════════════════════════ */
+var PROFILES = {
+  integrador: {
+    name: '🌟 El Integrador', color: '#f0b840',
+    tagline: 'Rareza valiosa: claridad, coherencia y exploración en equilibrio.',
+    desc: 'Has desarrollado la habilidad más difícil del proceso vocacional: tomar decisiones coherentes con tus intereses genuinos mientras mantienes la curiosidad abierta. No te dejaste llevar por la presión social ni te perdiste en la exploración sin rumbo. Construiste tu mapa con paciencia, información real y honestidad contigo mismo.',
+    str: ['Tomas decisiones basadas en autoconocimiento real, no en presión externa.', 'Mantienes la curiosidad activa sin perder el hilo conductor.', 'Tienes resiliencia para navegar la incertidumbre sin paralizarte.'],
+    risk: ['Puedes volverse exigente contigo mismo si las cosas no salen perfectas.', 'El alto estándar propio puede convertirse en obstáculo en momentos de transición.'],
+    rec: ['Documenta tu proceso: tu historia de decisiones es un recurso valioso.', 'Busca mentoría activa con alguien que ya esté donde tú quieres estar.', 'Define un horizonte de 2 años con metas específicas y revisables.'],
+    impact: 'Es muy probable que construyas un camino profesional genuinamente tuyo. No sin dificultades —esas siempre existen— pero con la diferencia fundamental de que serán dificultades en un camino que elegiste con conciencia.',
+    cta: 'Escribe los tres valores que más guían tus decisiones vocacionales.'
+  },
+  decisor: {
+    name: '🧭 Decisor Estratégico', color: '#f0b840',
+    tagline: 'Has construido un mapa con tu propia brújula.',
+    desc: 'Desarrollaste la capacidad de alinear tus intereses, habilidades y valores con opciones reales del mundo. Tus decisiones son consistentes con quién eres, y has aprendido a resistir la presión externa sin ignorarla por completo. Elegiste tu camino, no el más obvio ni el más seguro.',
+    str: ['Alta conciencia de tus intereses y valores personales.', 'Capacidad de decidir bajo presión sin perder el hilo propio.', 'Pensamiento de largo plazo: consideras consecuencias antes de actuar.'],
+    risk: ['Puedes volverse rígido si dejas de explorar después de decidir.', 'La claridad puede convertirse en certeza excesiva que cierre nuevas posibilidades.'],
+    rec: ['Mantén activo el hábito de exploración aunque ya tengas una dirección.', 'Busca comunidades de personas que ya hacen lo que te interesa.', 'Revisita tus decisiones cada 6 meses con ojos frescos.'],
+    impact: 'Es probable que construyas un camino profesional coherente y sostenible. El camino tendrá curvas, pero las navegarás con una brújula interna que no muchos tienen.',
+    cta: 'Esta semana agenda una conversación con alguien que trabaje en tu área de interés.'
+  },
+  lider: {
+    name: '🔥 Líder Bajo Presión', color: '#fb923c',
+    tagline: 'Claridad firme en un campo minado de expectativas.',
+    desc: 'Tienes claridad sobre lo que quieres y coherencia para actuar en consecuencia. Pero cargas con un nivel alto de presión externa que te exige doble esfuerzo: tomar buenas decisiones Y gestionar las expectativas de los demás al mismo tiempo. Eso agota, y tiene un costo real.',
+    str: ['Claridad vocacional real en condiciones adversas.', 'Resistencia a la presión social sin perder el rumbo.', 'Consciencia de las expectativas externas y capacidad de gestionarlas.'],
+    risk: ['Agotamiento por tener que justificar constantemente tus decisiones.', 'Riesgo de ceder en algún punto por puro desgaste, no por convicción.'],
+    rec: ['Identifica quiénes en tu entorno suman y quiénes drenan tu energía vocacional.', 'Construye un círculo pequeño de apoyo que entienda tu proceso.', 'Practica comunicar tus decisiones con seguridad y sin pedir permiso.'],
+    impact: 'Puedes llegar muy lejos. Pero si no gestionas la carga de presión, el camino se vuelve más duro de lo que tendría que ser. Tu claridad merece un entorno que la apoye.',
+    cta: 'Habla con una persona de confianza sobre cómo te afecta la presión que sientes.'
+  },
+  pionero: {
+    name: '🚀 El Pionero', color: '#a78bfa',
+    tagline: 'Visión amplia, camino en construcción.',
+    desc: 'Tienes una dirección clara y una energía exploradora genuina. No te atas fácilmente a una sola opción porque sabes que el mundo es más complejo que las categorías tradicionales. Eso es una fortaleza real en un mercado que premia los perfiles híbridos. El riesgo: que la exploración constante postergue la consolidación.',
+    str: ['Visión transversal que conecta campos que otros no relacionan.', 'Alta tolerancia a la incertidumbre sin paralizarse.', 'Energía genuina para explorar sin necesitar certeza previa.'],
+    risk: ['Puede tomar mucho tiempo consolidar una dirección accionable.', 'El entorno puede percibir la amplitud como falta de compromiso.'],
+    rec: ['Elige un hilo conductor principal, aunque explores múltiples áreas.', 'Documenta tus exploraciones para encontrar el patrón que las une.', 'Busca referentes de carreras híbridas que te resuenen.'],
+    impact: 'Puedes construir un perfil profesional verdaderamente singular. Pero necesitas encontrar el hilo que conecta todo lo que te apasiona, o el talento se dispersará sin llegar a ningún lado concreto.',
+    cta: 'Escribe en una frase qué tienen en común las 3 cosas que más te apasionan.'
+  },
+  visionario: {
+    name: '⚡ Visionario Contradictorio', color: '#fbbf24',
+    tagline: 'Sabes lo que quieres, pero tus acciones apuntan a otro lado.',
+    desc: 'Hay una brecha entre lo que dices querer y lo que realmente haces cuando llega el momento de decidir. Tienes claridad sobre tus intereses, pero tus decisiones frecuentemente no la reflejan. Puede ser por presión externa, miedo al fracaso, o hábitos de decisión que aún no has revisado.',
+    str: ['Conciencia de tus intereses genuinos.', 'Capacidad de articular lo que quieres cuando te preguntan.', 'Suficiente autocrítica para notar cuando algo no encaja.'],
+    risk: ['Tomar decisiones importantes desde la incoherencia tiene costo acumulativo.', 'La brecha entre visión y acción puede crecer hasta convertirse en parálisis.'],
+    rec: ['Identifica en qué momentos específicos tu acción diverge de tu intención.', 'Practica tomar pequeñas decisiones coherentes como entrenamiento diario.', 'Trabaja con un orientador para encontrar la causa de la brecha.'],
+    impact: 'Si no cierras la brecha entre lo que quieres y lo que haces, puedes llegar años después a un punto de "llegué donde quería ir... pero no es donde quería estar". Ese es uno de los dolores más profundos del proceso vocacional.',
+    cta: 'Esta semana toma UNA decisión pequeña completamente alineada con lo que dices querer.'
+  },
+  ejecutor: {
+    name: '⚙️ Ejecutor Sin Brújula', color: '#4ecdc4',
+    tagline: 'Muy bueno ejecutando. ¿Pero ejecutando qué y para qué?',
+    desc: 'Tus decisiones son consistentes y responsables, pero no siempre parten de tus propios intereses. Eres bueno siguiendo instrucciones y cumpliendo expectativas. El problema es que el mapa que estás siguiendo quizás no es el tuyo. La eficiencia sin dirección propia puede llevarte muy lejos... en la dirección equivocada.',
+    str: ['Alta responsabilidad y consistencia en las acciones.', 'Capacidad de seguir compromisos incluso bajo dificultad.', 'Confianza y credibilidad en tu entorno.'],
+    risk: ['Puedes construir una carrera exitosa desde afuera pero vacía por adentro.', 'La falta de conexión con los propios intereses genera agotamiento a mediano plazo.'],
+    rec: ['Hazte regularmente la pregunta: "¿Esto lo hago porque quiero o porque debo?"', 'Explora espacios de interés personal sin presión de resultado.', 'Lee historias de personas que encontraron vocación en la adultez tardía.'],
+    impact: 'Si sigues en piloto automático, puedes llegar a los 30 con una carrera estable que no reconoces como tuya. El éxito externo sin alineación interna tiene una fecha de vencimiento.',
+    cta: 'Esta semana haz algo durante 30 minutos que te guste sin que nadie te lo haya pedido.'
+  },
+  influenciado: {
+    name: '🌊 El Influenciado', color: '#f87171',
+    tagline: 'Las olas de afuera son más fuertes que tu voz adentro.',
+    desc: 'Las decisiones que has tomado han estado principalmente moldeadas por la presión y las expectativas de otros. No porque seas débil, sino porque nadie te ha dado aún las herramientas para separar tu voz de la de los demás. Esa distinción es la más importante de todo el proceso vocacional.',
+    str: ['Alta capacidad de escucha y adaptación social.', 'Deseo genuino de hacer las cosas bien.', 'Consciencia de que algo no está del todo bien en tu proceso.'],
+    risk: ['Elegir una carrera basada en expectativas ajenas tiene consecuencias profundas.', 'Sin intervención, el patrón puede repetirse en cada decisión importante de tu vida.'],
+    rec: ['Busca orientación vocacional profesional lo antes posible.', 'Practica preguntarte "¿Qué querría si nadie tuviera opinión sobre esto?" antes de decidir.', 'Lleva un diario de tus propios deseos, sin filtrar por lo que otros esperan.'],
+    impact: 'Si no desarrollas tu propia voz vocacional, es muy probable que tomes la decisión más grande de tu vida basándote en lo que alguien más quería para ti. Eso genera un dolor que no tiene nombre fácil.',
+    cta: 'Escribe hoy: ¿Qué estudiaría si nadie más tuviera opinión sobre mi vida?'
+  },
+  explorador: {
+    name: '🗺️ Explorador Disperso', color: '#a78bfa',
+    tagline: 'Ves todo el mapa, pero aún no sabes dónde estás tú.',
+    desc: 'Tienes una curiosidad genuina y amplia que es una fortaleza real. Has tocado muchas áreas y acumulado experiencias diversas. El problema es que sin un hilo conductor, toda esa exploración puede convertirse en un inventario de cosas interesantes que no llevan a ningún lugar concreto.',
+    str: ['Riqueza de experiencias y referencias.', 'Apertura mental real frente a opciones no convencionales.', 'Capacidad de conectar ideas de campos distintos.'],
+    risk: ['Puede pasar años explorando sin consolidar ninguna dirección.', 'El entorno puede perciberte como inconstante o indeciso.'],
+    rec: ['Busca el patrón en tus exploraciones: ¿qué tienen en común las cosas que te llaman?', 'Elige UNA área para explorar en profundidad durante al menos tres meses seguidos.', 'Busca un mentor que haya navegado una carrera no convencional.'],
+    impact: 'Si no encuentras el hilo que une tus exploraciones, es probable que dentro de cinco años todavía estés buscando "tu verdadera vocación". La exploración sin síntesis es como leer muchos mapas sin elegir un destino.',
+    cta: 'Haz una lista de todo lo que te ha llamado la atención. Busca el patrón que los conecta.'
+  },
+  bloqueado: {
+    name: '🔒 El Bloqueado', color: '#f87171',
+    tagline: 'La presión acumulada ha silenciado tu propia voz.',
+    desc: 'La combinación de alta presión externa, baja claridad y poca coherencia indica que algo importante está obstaculizando tu proceso. No es falta de inteligencia ni de ganas: es que la carga de expectativas ajenas se ha vuelto tan grande que es difícil escucharte a ti mismo. Esto no es un diagnóstico definitivo. Es una señal de que necesitas apoyo real.',
+    str: ['El hecho de que hayas llegado hasta aquí ya muestra resistencia.', 'La incomodidad que sientes es una señal honesta de que algo necesita cambiar.', 'Tienes consciencia de que el proceso no está funcionando como debería.'],
+    risk: ['Tomar decisiones vocacionales importantes desde este estado puede tener consecuencias de largo plazo.', 'Sin apoyo, el bloqueo puede cronificarse y afectar otras áreas de la vida.'],
+    rec: ['Busca orientación vocacional profesional: esto no se resuelve solo.', 'Habla con alguien de confianza sobre la presión que sientes, no sobre qué estudiar.', 'Date permiso de no saber todavía. La urgencia artificial aumenta el bloqueo.'],
+    impact: 'Si no buscas apoyo ahora, es probable que tomes la próxima decisión importante desde el agotamiento, no desde el conocimiento de ti mismo. Eso tiene un costo que se paga durante años.',
+    cta: 'Esta semana habla con un orientador o adulto de confianza. No sobre qué estudiar: sobre cómo estás.'
+  },
+  equilibrista: {
+    name: '⚖️ El Equilibrista', color: '#60a5fa',
+    tagline: 'En transición. Ni perdido ni llegado.',
+    desc: 'Tus indicadores están en zona media: ni claridad plena ni confusión total, ni coherencia perfecta ni contradicción sistemática. Estás en una etapa de transición real, que es la más común y también la menos reconocida. No estás bloqueado —estás en proceso. Y ese proceso, navegado con intención, tiene todo para llevarte a buen puerto.',
+    str: ['Equilibrio entre apertura y criterio.', 'Capacidad de revisión: no te aferras obstinadamente a una sola opción.', 'Consciencia del proceso sin catastrofizar la incertidumbre.'],
+    risk: ['Quedarse en zona media por comodidad puede convertirse en postergación crónica.', 'Sin movimiento activo, el equilibrio se vuelve estancamiento.'],
+    rec: ['Define un plazo concreto para tomar una decisión vocacional, aunque sea provisional.', 'Aumenta la intensidad de tu exploración: más conversaciones reales, más experiencias.', 'Elige un área de interés para profundizar durante el próximo mes.'],
+    impact: 'Si mantienes el movimiento activo, el equilibrio que tienes ahora puede convertirse en claridad. Si te quedas cómodo en la zona media, el tiempo pasará y las preguntas seguirán siendo las mismas.',
+    cta: 'Esta semana toma UNA acción concreta hacia cualquier área que te interese.'
+  }
+};
+
+function getProfileKey() {
+  var c = G.c, co = G.co, p = G.p, e = G.e;
+  if (c >= 65 && co >= 65 && e >= 60)         return 'integrador';
+  if (c >= 65 && co >= 65 && p <= 45)         return 'decisor';
+  if (c >= 65 && co >= 65 && p > 45)          return 'lider';
+  if (c >= 60 && co < 50  && e >= 55)         return 'pionero';
+  if (c >= 60 && co < 50  && e < 55)          return 'visionario';
+  if (c < 48  && co >= 60)                    return 'ejecutor';
+  if (p >= 65 && c < 50)                      return 'influenciado';
+  if (e >= 65 && c < 50  && co < 50)          return 'explorador';
+  if (p >= 55 && c < 40  && co < 40)          return 'bloqueado';
+  return 'equilibrista';
+}
+
+function showResults() {
+  var key = getProfileKey();
+  var pr = PROFILES[key];
+  G.profileKey = key;
+
+  document.getElementById('resName').textContent = pr.name;
+  document.getElementById('resName').style.color = pr.color;
+  document.getElementById('resTagline').textContent = pr.tagline;
+  document.getElementById('resDesc').textContent = pr.desc;
+
+  var strEl = document.getElementById('resStr');
+  strEl.innerHTML = '';
+  for (var i = 0; i < pr.str.length; i++) {
+    var li = document.createElement('li'); li.textContent = pr.str[i]; strEl.appendChild(li);
+  }
+  var riskEl = document.getElementById('resRisk');
+  riskEl.innerHTML = '';
+  for (var i = 0; i < pr.risk.length; i++) {
+    var li = document.createElement('li'); li.textContent = pr.risk[i]; riskEl.appendChild(li);
+  }
+  var recEl = document.getElementById('resRec');
+  recEl.innerHTML = '';
+  for (var i = 0; i < pr.rec.length; i++) {
+    var li = document.createElement('li'); li.textContent = pr.rec[i]; recEl.appendChild(li);
+  }
+  document.getElementById('resImpact').textContent = pr.impact;
+
+  document.getElementById('rC').textContent  = G.c;
+  document.getElementById('rCo').textContent = G.co;
+  document.getElementById('rP').textContent  = G.p;
+  document.getElementById('rE').textContent  = G.e;
+
+  goTo('s-results');
+  setTimeout(function() {
+    document.getElementById('rCBar').style.width  = G.c  + '%';
+    document.getElementById('rCoBar').style.width = G.co + '%';
+    document.getElementById('rPBar').style.width  = G.p  + '%';
+    document.getElementById('rEBar').style.width  = G.e  + '%';
+  }, 400);
+}
+
+/* ═══════════════════════════════
+   INTERESTS DATA
+═══════════════════════════════ */
+var INTERESTS = [
+  { id:'tech',    ico:'💻', lbl:'Tecnología',      sub:'Código, apps, sistemas, IA' },
+  { id:'arte',    ico:'🎨', lbl:'Arte y Diseño',   sub:'Visual, gráfico, moda, cine' },
+  { id:'salud',   ico:'🩺', lbl:'Salud',            sub:'Cuerpo, mente, bienestar' },
+  { id:'social',  ico:'🤝', lbl:'Ciencias Sociales',sub:'Personas, sociedad, comunidad' },
+  { id:'ciencia', ico:'🔬', lbl:'Ciencias',         sub:'Investigar, experimentar, descubrir' },
+  { id:'negocios',ico:'📊', lbl:'Negocios',         sub:'Empresa, economía, finanzas' },
+  { id:'educa',   ico:'📚', lbl:'Educación',        sub:'Enseñar, formar, orientar' },
+  { id:'comun',   ico:'🎙️', lbl:'Comunicación',    sub:'Medios, lenguaje, narrativa' },
+  { id:'derecho', ico:'⚖️', lbl:'Derecho',          sub:'Justicia, normas, política' },
+  { id:'natu',    ico:'🌿', lbl:'Naturaleza',       sub:'Ambiente, animales, recursos' }
+];
+
+/* ═══════════════════════════════
+   CAREERS DATA  (15 carreras)
+═══════════════════════════════ */
+var CAREERS = [
+  {
+    ico:'💻', name:'Ingeniería de Software', area:'Tecnología',
+    tags:['tech','ciencia','negocios'],
+    why:'Tu perfil muestra capacidad analítica y orientación a resolver problemas complejos. El desarrollo de software combina lógica rigurosa con creatividad real: no hay dos soluciones iguales.',
+    what:'Programación, estructuras de datos, bases de datos, desarrollo web/móvil, inteligencia artificial.'
+  },
+  {
+    ico:'🎨', name:'Diseño UX/UI', area:'Diseño · Tecnología',
+    tags:['arte','tech','comun'],
+    why:'Conecta dos mundos que pocas veces se juntan bien: la estética y la funcionalidad. Tu curiosidad por las personas y el gusto visual son exactamente lo que esta disciplina necesita.',
+    what:'Diseño de interfaces, psicología del usuario, prototipado, investigación de usuarios, herramientas digitales.'
+  },
+  {
+    ico:'🩺', name:'Medicina', area:'Salud',
+    tags:['salud','ciencia','social'],
+    why:'Para quienes combinan vocación de servicio con capacidad analítica y tolerancia a la incertidumbre. Es una carrera de largo aliento que recompensa la dedicación profunda.',
+    what:'Ciencias básicas, anatomía, farmacología, clínica, especialidades médicas.'
+  },
+  {
+    ico:'🧠', name:'Psicología', area:'Salud · Ciencias Sociales',
+    tags:['salud','social','educa'],
+    why:'Si te preguntaste por qué las personas toman las decisiones que toman, ya estás pensando como psicólogo. Tu capacidad de observar el comportamiento humano es una ventaja real.',
+    what:'Psicología clínica, organizacional, educativa, neuropsicología, investigación conductual.'
+  },
+  {
+    ico:'📊', name:'Administración de Empresas', area:'Negocios',
+    tags:['negocios','comun','derecho'],
+    why:'Más que gestionar recursos, es entender cómo funcionan los sistemas humanos y económicos. Tu capacidad de tomar decisiones bajo presión es exactamente lo que esta carrera forma.',
+    what:'Finanzas, marketing, estrategia, operaciones, emprendimiento, liderazgo organizacional.'
+  },
+  {
+    ico:'🌿', name:'Ingeniería Ambiental', area:'Ciencias · Naturaleza',
+    tags:['natu','ciencia','tech'],
+    why:'Una de las carreras más urgentes del siglo. Combina ciencia dura con impacto social real. Si te importa el futuro del planeta, aquí el "por qué" nunca faltará.',
+    what:'Gestión de residuos, agua, contaminación, energías renovables, legislación ambiental.'
+  },
+  {
+    ico:'🎙️', name:'Comunicación Social', area:'Comunicación',
+    tags:['comun','arte','social'],
+    why:'Si tienes habilidad para contar historias y entender a las audiencias, esta carrera amplifica esas capacidades. El mundo necesita comunicadores que piensen críticamente.',
+    what:'Periodismo, producción audiovisual, relaciones públicas, comunicación digital, narrativa.'
+  },
+  {
+    ico:'⚖️', name:'Derecho', area:'Derecho · Ciencias Sociales',
+    tags:['derecho','social','comun'],
+    why:'No es solo defender casos. Es entender cómo las normas estructuran la convivencia humana. Tu pensamiento crítico y capacidad argumentativa son activos clave en esta carrera.',
+    what:'Derecho civil, penal, internacional, constitucional, empresarial y derechos humanos.'
+  },
+  {
+    ico:'🔬', name:'Bioquímica / Biotecnología', area:'Ciencias',
+    tags:['ciencia','salud','natu'],
+    why:'Para mentes que disfrutan el detalle microscópico y la pregunta que nadie ha respondido aún. Una carrera de frontera con impacto en medicina, agricultura y ambiente.',
+    what:'Biología molecular, genética, laboratorio, investigación científica, biotecnología aplicada.'
+  },
+  {
+    ico:'📚', name:'Licenciatura en Educación', area:'Educación',
+    tags:['educa','social','comun'],
+    why:'Enseñar es una de las formas más poderosas de transformar una sociedad. Si disfrutas explicar, motivar y acompañar procesos de aprendizaje, aquí tu impacto es inmediato y real.',
+    what:'Pedagogía, didáctica, psicología del aprendizaje, gestión educativa, diseño curricular.'
+  },
+  {
+    ico:'🏗️', name:'Arquitectura', area:'Diseño · Ingeniería',
+    tags:['arte','tech','natu'],
+    why:'Donde el arte y la ingeniería se encuentran. Diseñas los espacios donde las personas viven, trabajan y se relacionan. Tu sentido estético y capacidad técnica tienen un lugar aquí.',
+    what:'Diseño arquitectónico, estructuras, urbanismo, materiales, historia del arte y la arquitectura.'
+  },
+  {
+    ico:'💰', name:'Economía', area:'Negocios · Ciencias Sociales',
+    tags:['negocios','ciencia','derecho'],
+    why:'Entender por qué las personas y los países toman las decisiones que toman es fascinante y útil. La economía mezcla matemáticas, psicología y política de formas que pocas disciplinas logran.',
+    what:'Microeconomía, macroeconomía, econometría, política económica, finanzas internacionales.'
+  },
+  {
+    ico:'🎬', name:'Producción Audiovisual', area:'Arte · Comunicación',
+    tags:['arte','comun','tech'],
+    why:'El mundo consume contenido visual más que nunca. Si tienes visión estética y quieres contar historias que emocionen o informen, esta carrera tiene un mercado en expansión real.',
+    what:'Dirección, guión, fotografía, edición, producción musical, distribución de contenido.'
+  },
+  {
+    ico:'🤝', name:'Trabajo Social', area:'Ciencias Sociales',
+    tags:['social','educa','salud'],
+    why:'Para quienes no pueden ignorar la injusticia. Combina acción directa con análisis sistémico. Tu empatía y capacidad de escucha son herramientas de trabajo reales en esta carrera.',
+    what:'Intervención social, política pública, derechos humanos, gestión comunitaria, acompañamiento psicosocial.'
+  },
+  {
+    ico:'🚀', name:'Ingeniería Industrial', area:'Ingeniería · Negocios',
+    tags:['tech','negocios','ciencia'],
+    why:'Si piensas naturalmente en cómo mejorar los procesos y hacer que los sistemas funcionen mejor, esta carrera formaliza esa intuición. Alta empleabilidad y versatilidad de campo.',
+    what:'Procesos productivos, logística, gestión de calidad, estadística aplicada, proyectos de mejora.'
+  }
+];
+
+/* ═══════════════════════════════
+   INTERESTS LOGIC
+═══════════════════════════════ */
+var selectedInterests = [];
+
+function buildInterestGrid() {
+  var grid = document.getElementById('interestGrid');
+  grid.innerHTML = '';
+  for (var i = 0; i < INTERESTS.length; i++) {
+    (function(item) {
+      var div = document.createElement('div');
+      div.className = 'int-chip';
+      div.innerHTML =
+        '<span class="int-chip-ico">' + item.ico + '</span>' +
+        '<span class="int-chip-lbl">' + item.lbl + '</span>' +
+        '<span class="int-chip-sub">' + item.sub + '</span>';
+      div.onclick = function() { toggleInterest(item.id, div); };
+      grid.appendChild(div);
+    })(INTERESTS[i]);
+  }
+}
+
+function toggleInterest(id, el) {
+  var idx = selectedInterests.indexOf(id);
+  if (idx === -1) {
+    if (selectedInterests.length >= 4) return; // max 4
+    selectedInterests.push(id);
+    el.classList.add('sel');
+  } else {
+    selectedInterests.splice(idx, 1);
+    el.classList.remove('sel');
+  }
+  var btn = document.getElementById('intContinueBtn');
+  var hint = document.getElementById('intHint');
+  var n = selectedInterests.length;
+  btn.disabled = n < 2;
+  if (n === 0) hint.textContent = 'Selecciona al menos 2 áreas para continuar';
+  else if (n === 1) hint.textContent = 'Selecciona una más...';
+  else if (n < 4) hint.textContent = n + ' seleccionadas · Puedes elegir hasta ' + (4 - n) + ' más';
+  else hint.textContent = '4 seleccionadas · Máximo alcanzado';
+}
+
+/* ═══════════════════════════════
+   CAREERS LOGIC
+═══════════════════════════════ */
+function showCareers() {
+  var pr = PROFILES[G.profileKey || 'equilibrista'];
+  document.getElementById('carTitle').textContent = 'Carreras para ' + pr.name.split(' ').slice(1).join(' ');
+
+  // Score each career by tag overlap
+  var scored = [];
+  for (var i = 0; i < CAREERS.length; i++) {
+    var car = CAREERS[i];
+    var score = 0;
+    for (var j = 0; j < car.tags.length; j++) {
+      if (selectedInterests.indexOf(car.tags[j]) !== -1) score++;
+    }
+    if (score > 0) scored.push({ car: car, score: score });
+  }
+  // Sort by score desc, take top 6
+  scored.sort(function(a, b) { return b.score - a.score; });
+  var top = scored.slice(0, 6);
+  // If fewer than 3, fill with non-selected careers
+  if (top.length < 3) {
+    for (var i = 0; i < CAREERS.length && top.length < 5; i++) {
+      var already = false;
+      for (var j = 0; j < top.length; j++) { if (top[j].car === CAREERS[i]) { already = true; break; } }
+      if (!already) top.push({ car: CAREERS[i], score: 0 });
+    }
+  }
+
+  var grid = document.getElementById('careerGrid');
+  grid.innerHTML = '';
+  for (var i = 0; i < top.length; i++) {
+    var item = top[i];
+    var isHigh = item.score >= 2;
+    var card = document.createElement('div');
+    card.className = 'car-card ' + (isHigh ? 'match-high' : 'match-mid');
+    card.innerHTML =
+      '<div class="car-card-head">' +
+        '<div class="car-card-left">' +
+          '<span class="car-card-ico">' + item.car.ico + '</span>' +
+          '<div><div class="car-card-name">' + item.car.name + '</div>' +
+          '<div class="car-card-area">' + item.car.area + '</div></div>' +
+        '</div>' +
+        '<span class="match-badge ' + (isHigh ? 'high' : 'mid') + '">' +
+          (isHigh ? 'Alta afinidad' : 'Compatible') +
+        '</span>' +
+      '</div>' +
+      '<div class="car-why">💡 ' + item.car.why + '</div>' +
+      '<div class="car-what-lbl">Qué estudiarías</div>' +
+      '<div class="car-what">' + item.car.what + '</div>';
+    grid.appendChild(card);
+  }
+
+  goTo('s-careers');
+}
+
+/* ═══════════════════════════════
+   WHATSAPP SHARE
+═══════════════════════════════ */
+function shareWhatsApp() {
+  var pr = PROFILES[G.profileKey || 'equilibrista'];
+  var txt =
+    '🧭 *Mi Camino Vocacional*\n\n' +
+    'Completé el serious game vocacional y mi perfil es:\n\n' +
+    '*' + pr.name + '*\n' +
+    '_' + pr.tagline + '_\n\n' +
+    '📊 Mis indicadores finales:\n' +
+    '• Claridad: ' + G.c + '/100\n' +
+    '• Coherencia: ' + G.co + '/100\n' +
+    '• Presión: ' + G.p + '/100\n' +
+    '• Exploración: ' + G.e + '/100\n\n' +
+    '¡Pruébalo tú también! 🚀';
+  var url = 'https://wa.me/?text=' + encodeURIComponent(txt);
+  window.open(url, '_blank');
+}
+
+function shareResult() { shareWhatsApp(); }
+
+function restart() {
+  G.idx = 0; G.c = 30; G.co = 30; G.p = 20; G.e = 20; G.profileKey = null;
+  selectedInterests = [];
+  document.getElementById('pname').value = '';
+  document.getElementById('reflText').value = '';
+  goTo('s-intro');
+}
+
+/* ═══════════════════════════════
+   NAVIGATION OVERRIDE
+═══════════════════════════════ */
+var _origGoTo = goTo;
+goTo = function(id) {
+  _origGoTo(id);
+  if (id === 's-interests') {
+    selectedInterests = [];
+    buildInterestGrid();
+    document.getElementById('intContinueBtn').disabled = true;
+    document.getElementById('intHint').textContent = 'Selecciona al menos 2 áreas para continuar';
+  }
+  if (id === 's-reflection' && G.profileKey) {
+    document.getElementById('reflCta').textContent = PROFILES[G.profileKey].cta;
+  }
+};
+</script>
+</body>
+</html>
